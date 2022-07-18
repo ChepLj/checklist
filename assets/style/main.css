@@ -1,3 +1,6 @@
+
+
+
 *{
     max-width: 600px;
     
@@ -65,14 +68,15 @@ div.area-menu-wrap{
 div.area-menu-wrap::after{
     content: "";
     display: block;
-    background:#8AC186;
+    background:var(--color, rgb(13, 229, 13));
     opacity: 1;
-    width: 50%;
+    width: var(--persent, 0%);
     height: 100%;
     left: 0;
     top: 0%;
     position: absolute;
     z-index: 2;
+    transition: width 4s linear 2s;
 }
 
 div .area-name_wrap{
