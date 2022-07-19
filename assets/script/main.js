@@ -577,15 +577,17 @@ let levelId = []
 let info = {}
 let dateCheck = 220714
 
-fetch('http://localhost:3000/data')
+// fetch('http://localhost:3000/data')
+fetch('https://api.jsonbin.io/v3/b/62d610f74d5b061b1b579543/latest')
 .then(function(result){
     return result.json()
 })
 .then(function(result){
     console.log(result)
-    data = result
-    makeInfoObject(result)
-    renderGroupMenu(result)
+    console.log(result.record.data)
+    data = result.record.data
+    makeInfoObject(data)
+    renderGroupMenu(data)
 
 })
 .catch((err)=>{console.log("catch" ,err)})
@@ -593,10 +595,11 @@ fetch('http://localhost:3000/data')
 function renderGroupMenu(data){
     var htmlRaw = data.map((crr, index)=>{     
     var infoRender = getInfo(info, "group", [crr.id,""] , dateCheck)
+    var persent = Math.round((infoRender[3]/infoRender[4])*100)>=0? Math.round((infoRender[3]/infoRender[4])*100):0
         return `<div class="group-menu_wrap" data-index="${crr.id}">
                     <span class="title">${crr.description}</span>
                     <span class="detail">( ${infoRender[0]} Warn; ${infoRender[1]} cảnh báo; checked ${infoRender[3]}/${infoRender[4]} )</span>
-                    <span class="present">40%</span>
+                    <span class="present">${persent}%</span>
                 </div>`
     })
     groupMenuElm.innerHTML = htmlRaw.join("")
@@ -627,19 +630,22 @@ function renderAreaMenu(input, idGroup){
     const areaPresentElm = document.querySelectorAll('div.area-menu-wrap')
     areaPresentElm.forEach(element => {
         let persent = element.getAttribute('persent')
-        element.style.setProperty('--persent', persent + "%")
-        if(persent<=30)
+        setInterval(() => //delay tao hiệu ứng
         {
-            element.style.setProperty('--color', 'red')
-        }
-        else if(30<persent && persent<=70)
-        {
-            element.style.setProperty('--color', 'yellow')
-        }
-        else
-        {
-            element.style.setProperty('--color', 'green')
-        }
+            element.style.setProperty('--persent', persent + "%")
+            if(persent<=30)
+            {
+                element.style.setProperty('--color', 'red')
+            }
+            else if(30<persent && persent<=70)
+            {
+                element.style.setProperty('--color', 'yellow')
+            }
+            else
+            {
+                element.style.setProperty('--color', 'green')
+            }
+        }, 100);
         
     });
     
@@ -820,11 +826,13 @@ function getInfo(inputObject, level, id, date)
     let warn = 0
     let error = 0
     let normal = 0
+    const keyGroup = `groupId-${id[0]}`
+    const keyArea = `areaId-${id[1]}`
     switch (level) 
     {
         case "group": 
         {   
-            const keyGroup = `groupId-${id[0]}`
+            
             for( let keyArea in inputObject[keyGroup])
             {   
                 total += inputObject[keyGroup][keyArea].length
@@ -836,24 +844,9 @@ function getInfo(inputObject, level, id, date)
                         {
                             switch(resultObject[date][0])
                             {
-                                case "ok":
-                                    {
-                                        checked ++
-                                        normal ++
-                                        break;
-                                    }
-                                case "warn":
-                                    {
-                                        checked ++
-                                        warn ++
-                                        break;
-                                    }
-                                case "error":
-                                    {
-                                        checked ++
-                                        error ++
-                                        break;
-                                    }
+                                case "ok":{checked ++; normal ++; break;}
+                                case "warn":{checked ++; warn ++; break;}
+                                case "error":{checked ++; error ++; break;}
                                 default:
                             }
                         }
@@ -864,8 +857,7 @@ function getInfo(inputObject, level, id, date)
         }
         case "area": 
         {  
-            const keyGroup = `groupId-${id[0]}`
-            const keyArea = `areaId-${id[1]}`
+            
             dataGroup = inputObject[keyGroup]  
             total += dataGroup[keyArea].length
                 if(dataGroup[keyArea])
@@ -876,24 +868,9 @@ function getInfo(inputObject, level, id, date)
                         {
                             switch(resultObject[date][0])
                             {
-                                case "ok":
-                                    {
-                                        checked ++
-                                        normal ++
-                                        break;
-                                    }
-                                case "warn":
-                                    {
-                                        checked ++
-                                        warn ++
-                                        break;
-                                    }
-                                case "error":
-                                    {
-                                        checked ++
-                                        error ++
-                                        break;
-                                    }
+                                case "ok":{checked ++; normal ++; break;}
+                                case "warn":{checked ++; warn ++; break;}
+                                case "error":{checked ++; error ++; break;}
                                 default:
                             }
                         }

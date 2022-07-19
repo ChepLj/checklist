@@ -76,7 +76,8 @@ div.area-menu-wrap::after{
     top: 0%;
     position: absolute;
     z-index: 2;
-    transition: width 4s linear 2s;
+    border-radius: 3px;
+    transition: width 0.8s ease-out .2s;
 }
 
 div .area-name_wrap{
