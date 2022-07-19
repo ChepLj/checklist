@@ -570,12 +570,19 @@ const groupMenuElm = document.querySelector('.group-menu')
 const areaMenuElm = document.querySelector('.area-menu')
 const equipmentMenuElm = document.querySelector('.equipment-menu')
 const arowBackElm = document.querySelector('.arrow-back-icon')
+const headerElm = document.querySelector('header')
+const headerTitleElm = headerElm.querySelector('.title-group')
+const headerTimeElm = headerElm.querySelector('.time')
+const headerShiftElm = headerElm.querySelector('.shift')
 
+let oldMenuTitle = ["Bảo Trì Điện Lò Cao"]
 let currentPage = []
 let data = []
 let levelId = []
 let info = {}
 let dateCheck = 220714
+let today = "19/07/2022"
+let shift = "Ca D"
 
 // fetch('http://localhost:3000/data')
 fetch('https://api.jsonbin.io/v3/b/62d610f74d5b061b1b579543/latest')
@@ -585,12 +592,13 @@ fetch('https://api.jsonbin.io/v3/b/62d610f74d5b061b1b579543/latest')
 .then(function(result){
     console.log(result)
     console.log(result.record.data)
-    data = result.record.data
+    data = result.record.data //xử lý cấu trúc của https://api.jsonbin.io (trả về data = result khi dùng localhost API)
     makeInfoObject(data)
     renderGroupMenu(data)
 
 })
 .catch((err)=>{console.log("catch" ,err)})
+
 // renderGroupMenu(dataMain)
 function renderGroupMenu(data){
     var htmlRaw = data.map((crr, index)=>{     
@@ -603,14 +611,15 @@ function renderGroupMenu(data){
                 </div>`
     })
     groupMenuElm.innerHTML = htmlRaw.join("")
+    groupMenuElm.style.paddingTop = headerElm.offsetHeight + "px"
     menuDisplay("group")
     
 }
 
 
-function renderAreaMenu(input, idGroup){
+function renderAreaMenu(input, idGroup, description){
     var htmlRaw = `<h3>Không Có Dữ Liệu</h3>`
-    arrayTemp = input.filter((crrGroup, index)=>{
+    input.forEach((crrGroup, index)=>{
         if(crrGroup.id === idGroup[0] && typeof(crrGroup.array) != "undefined"){
             htmlRaw = (crrGroup.array.map((crrArea, index)=>{
             var infoRender = getInfo(info, "area", [idGroup, crrArea.id] , dateCheck)
@@ -626,6 +635,9 @@ function renderAreaMenu(input, idGroup){
         }
     })
     areaMenuElm.innerHTML = htmlRaw
+    areaMenuElm.style.paddingTop = headerElm.offsetHeight + "px"
+    headerTitleElm.innerText = description
+    oldMenuTitle.push(oldMenu) //đưa tiêu đề menu cũ vào mảng
     menuDisplay("area")
     const areaPresentElm = document.querySelectorAll('div.area-menu-wrap')
     areaPresentElm.forEach(element => {
@@ -652,7 +664,7 @@ function renderAreaMenu(input, idGroup){
 
 }
 
-function renderEquipmentMenu(input, idArea){
+function renderEquipmentMenu(input, idArea, description, oldMenu){
     var htmlRaw = `<h3>Không Có Dữ Liệu</h3>`
     input.filter((crrGroup, index)=>{
         if(crrGroup.id === idArea[0] && typeof(crrGroup.array) != "undefined"){ //Nhóm -group
@@ -676,6 +688,9 @@ function renderEquipmentMenu(input, idArea){
                 
     })
     equipmentMenuElm.innerHTML = htmlRaw
+    equipmentMenuElm.style.paddingTop = headerElm.offsetHeight + "px"
+    headerTitleElm.innerText = description
+    oldMenuTitle.push(oldMenu) //đưa tiêu đề menu cũ vào mảng
     menuDisplay("equipment")
 }
 
@@ -710,7 +725,7 @@ function contentHandel(input){
     return html
 }
 
-function menuDisplay(string){
+function menuDisplay(string, backTitle){
     switch (string) {
         case "group":
             {
@@ -734,26 +749,43 @@ function menuDisplay(string){
                 currentPage= ["equipment","area","group"]
             }break;
     }
-        
+    if (backTitle)
+    {
+        console.log("menu", oldMenuTitle)
+        if(oldMenuTitle.length>=2)
+        {
+            if(oldMenuTitle[oldMenuTitle.length - 1] != headerTitleElm.innerText && oldMenuTitle != undefined )
+                {   headerTitleElm.innerText = oldMenuTitle[oldMenuTitle.length - 1]
+                    oldMenuTitle.pop()
+                }
+        }else
+        {
+            headerTitleElm.innerText = oldMenuTitle[0]
+        }
+    }   
 }
 
 function handleEven(){
     groupMenuElm.onclick = (e)=>{
         const idItemClick = e.target.closest('.group-menu_wrap').getAttribute("data-index")
+        const description = e.target.closest('.group-menu_wrap').querySelector('.title').innerText
         levelId = [idItemClick]
-        renderAreaMenu(dataMain, levelId)
+        oldMenu = headerTitleElm.innerText  //lưu tiêu đề của menu Cha
+        renderAreaMenu(dataMain, levelId, description, oldMenu)
     
     }
 
     arowBackElm.onclick = ()=>{
-        currentPage.length>=2? menuDisplay(currentPage[1]):""
+        currentPage.length>=2? menuDisplay(currentPage[1], oldMenuTitle):""
     }
 
     areaMenuElm.onclick = (e)=>{
         const idItemClick = e.target.closest('.area-menu-wrap').getAttribute("data-index")
+        const description = e.target.closest('.area-menu-wrap').querySelector('.name').innerText
         var levelIdTemp = [levelId[0], idItemClick]
         levelId = levelIdTemp
-        renderEquipmentMenu(dataMain, levelId)
+        oldMenu = headerTitleElm.innerText  //lưu tiêu đề của menu Cha
+        renderEquipmentMenu(dataMain, levelId, description, oldMenu)
         
     
     }
@@ -882,3 +914,18 @@ function getInfo(inputObject, level, id, date)
     }
     return [warn, error , normal, checked , total]
 }
+
+//init
+function initApp()
+{
+    //get time today
+
+    //get shift
+
+    //render date and sheet
+    headerTitleElm.innerText = oldMenuTitle[0]
+    headerTimeElm.innerText = today
+    headerShiftElm.innerText = shift
+
+}
+initApp()
