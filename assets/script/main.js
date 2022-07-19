@@ -636,11 +636,11 @@ function renderAreaMenu(input, idGroup, description){
     })
     areaMenuElm.innerHTML = htmlRaw
     areaMenuElm.style.paddingTop = headerElm.offsetHeight + "px"
-    headerTitleElm.innerText = description
+    headerTitleElm.innerText = description //gán tiêu để của menu
     oldMenuTitle.push(oldMenu) //đưa tiêu đề menu cũ vào mảng
     menuDisplay("area")
     const areaPresentElm = document.querySelectorAll('div.area-menu-wrap')
-    areaPresentElm.forEach(element => {
+    areaPresentElm.forEach(element => { //hiển thị màu sác theo phần trăm đã check
         let persent = element.getAttribute('persent')
         setInterval(() => //delay tao hiệu ứng
         {
@@ -765,8 +765,10 @@ function menuDisplay(string, backTitle){
     }   
 }
 
-function handleEven(){
-    groupMenuElm.onclick = (e)=>{
+function handleEven()
+{
+    groupMenuElm.onclick = (e)=>
+    {
         const idItemClick = e.target.closest('.group-menu_wrap').getAttribute("data-index")
         const description = e.target.closest('.group-menu_wrap').querySelector('.title').innerText
         levelId = [idItemClick]
@@ -775,11 +777,13 @@ function handleEven(){
     
     }
 
-    arowBackElm.onclick = ()=>{
+    arowBackElm.onclick = ()=>
+    {
         currentPage.length>=2? menuDisplay(currentPage[1], oldMenuTitle):""
     }
 
-    areaMenuElm.onclick = (e)=>{
+    areaMenuElm.onclick = (e)=>
+    {
         const idItemClick = e.target.closest('.area-menu-wrap').getAttribute("data-index")
         const description = e.target.closest('.area-menu-wrap').querySelector('.name').innerText
         var levelIdTemp = [levelId[0], idItemClick]
@@ -788,6 +792,19 @@ function handleEven(){
         renderEquipmentMenu(dataMain, levelId, description, oldMenu)
         
     
+    }
+
+    equipmentMenuElm.onclick = (e)=>
+    {
+        let parentTarget = e.target.closest('.equipment-menu-wrap')
+        if(e.target.classList == "name")
+        {
+            for(let value of parentTarget.querySelectorAll('.wrap-content'))
+            {
+                value.classList.toggle('active')
+            }
+        }
+        
     }
 }
 handleEven()

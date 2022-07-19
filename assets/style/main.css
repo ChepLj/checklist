@@ -177,7 +177,7 @@ div.area-menu-wrap .persent{
     display: none;
 }
 
-.equipment-menu-wrap:active{
+.equipment-menu-wrap .name:active{
     opacity: 0.5;
 }
 
@@ -201,6 +201,9 @@ div.area-menu-wrap .persent{
 
 .equipment-menu-wrap .wrap-content.active{
     display: flex;
+}
+.equipment-menu-wrap .wrap-content.checked{
+    color: #8AC186;
 }
 
 .equipment-menu-wrap .name{
