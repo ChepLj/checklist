@@ -368,7 +368,12 @@ function getInfo(inputObject, level, id, date)
 function initApp()
 {
     //get time today
-
+    let localTime = new Date()
+    let date = localTime.getDate()
+    let month = localTime.getMonth() + 1
+    let year = localTime.getFullYear()
+    today = `${year}-${month}-${date}`
+    console.log(today)
     //get shift
 
     //render date and sheet
