@@ -1,570 +1,3 @@
-var dataMain = [
-    {
-    "id": "01",
-    "comment": "Group",
-    "description": "Khu Vực BF",
-    "array": [
-                {
-                "id": "01",
-                "comment": "Area",
-                "description": "Nhà Quạt",
-                "array": [
-                        {
-                        "id": "01",
-                        "comment": "Equipment",
-                        "description": "Tủ điện trung thế BPRT",
-                        "array": [
-                        {
-                        "id": "01",
-                        "comment": "Content",
-                        "description": "Relay trung thế báo lỗi",
-                        "type": [
-                        "check",
-                        "Bình Thường",
-                        "Có vấn đề"
-                        ],
-                        "result": {
-                        "220714": ["ok","Bình Thường"]
-                        }
-                        }
-                        ]
-                        },
-                {
-                "id": "02",
-                "comment": "Equipment",
-                "description": "Motor BPRT (12MW)",
-                "array": [
-                {
-                "id": "01",
-                "comment": "Content",
-                "description": "Nhiệt độ cuộn dây",
-                "type": [
-                "typing",
-                "A",
-                "B",
-                "C"
-                ],
-                "result": {
-                "220714": ["ok", [56.7,66,65]]
-                }
-                },
-                {
-                "id": "02",
-                "comment": "Content",
-                "description": " Nhiệt độ bạc đạn",
-                "type": [
-                "typing",
-                "Đầu",
-                "Đuôi"
-                ],
-                "result": {
-                "220714": ["warn", [56.7,90,65]]
-                }
-                }
-                ]
-                },
-                {
-                "id": "03",
-                "comment": "Equipment",
-                "description": "Tủ điện trung thế D2500",
-                "array": [
-                {
-                "id": "01",
-                "comment": "Content",
-                "description": "Relay trung thế báo lỗi",
-                "type": [
-                "check",
-                "Bình Thường",
-                "Có vấn đề"
-                ],
-                "result": { }
-                }
-                ]
-                },
-                {
-                "id": "04",
-                "comment": "Equipment",
-                "description": "Motor D2500 (10.5MW)",
-                "array": [
-                {
-                "id": "01",
-                "comment": "Content",
-                "description": "Nhiệt độ cuộn dây",
-                "type": [
-                "typing",
-                "A",
-                "B",
-                "C"
-                ],
-                "result": { 
-                    "220714": ["error", [156,120,143]]
-                }
-                },
-                {
-                "id": "02",
-                "comment": "Content",
-                "description": " Nhiệt độ bạc đạn",
-                "type": [
-                "typing",
-                "Đầu",
-                "Đuôi"
-                ],
-                "result": { }
-                }
-                ]
-                },
-                {
-                "id": "05",
-                "comment": "Equipment",
-                "description": "Tủ điện trung thế lộ phân phối",
-                "array": [
-                {
-                "id": "01",
-                "comment": "Content",
-                "description": "Nhiệt độ (từ 25-32°C)",
-                "type": [
-                "check",
-                "Bình Thường",
-                "Có vấn đề"
-                ],
-                "result": { }
-                },
-                {
-                "id": "02",
-                "comment": "Content",
-                "description": "Độ ẩm trung bình (từ 65-75%)",
-                "type": [
-                "check",
-                "Bình Thường",
-                "Có vấn đề"
-                ],
-                "result": { }
-                },
-                {
-                "id": "03",
-                "comment": "Content",
-                "description": "Relay trung thế báo lỗ",
-                "type": [
-                "check",
-                "Bình Thường",
-                "Có vấn đề"
-                ],
-                "result": { }
-                }
-                ]
-                },
-                {
-                "id": "06",
-                "comment": "Equipment",
-                "description": "Hệ thống bù",
-                "array": [
-                {
-                "id": "01",
-                "comment": "Content",
-                "description": "Tủ bù P1+P2",
-                "type": [
-                "check",
-                "Bình Thường",
-                "Có vấn đề"
-                ],
-                "result": { }
-                },
-                {
-                "id": "02",
-                "comment": "Content",
-                "description": "Tủ bù E1+E2",
-                "type": [
-                "check",
-                "Bình Thường",
-                "Có vấn đề"
-                ],
-                "result": { }
-                },
-                {
-                "id": "03",
-                "comment": "Content",
-                "description": "Tủ bù F1+F2",
-                "type": [
-                "check",
-                "Bình Thường",
-                "Có vấn đề"
-                ],
-                "result": { }
-                }
-                ]
-                },
-                {
-                "id": "07",
-                "comment": "Equipment",
-                "description": "MBA số 3",
-                "array": [
-                {
-                "id": "01",
-                "comment": "Content",
-                "description": "Nhiệt độ",
-                "type": [
-                "typing",
-                "Dầu"
-                ],
-                "result": { }
-                },
-                {
-                "id": "02",
-                "comment": "Content",
-                "description": "Âm thanh MBA",
-                "type": [
-                "check",
-                "Bình Thường",
-                "Có vấn đề"
-                ],
-                "result": { }
-                }
-                ]
-                },
-                {
-                "id": "08",
-                "comment": "Equipment",
-                "description": "MBA số 4",
-                "array": [
-                {
-                "id": "01",
-                "comment": "Content",
-                "description": "Nhiệt độ",
-                "type": [
-                "typing",
-                "Dầu"
-                ],
-                "result": { }
-                },
-                {
-                "id": "02",
-                "comment": "Content",
-                "description": "Âm thanh MBA",
-                "type": [
-                "check",
-                "Bình Thường",
-                "Có vấn đề"
-                ],
-                "result": { }
-                }
-                ]
-                },
-                {
-                "id": "09",
-                "comment": "Equipment",
-                "description": "Tủ UPS (BPRT+D2500)",
-                "array": [
-                {
-                "id": "01",
-                "comment": "Content",
-                "description": "( Ghi rõ cảnh báo nếu màn hình HMI báo)",
-                "type": [
-                "check",
-                "Bình Thường",
-                "Có vấn đề"
-                ],
-                "result": { }
-                }
-                ]
-                },
-                {
-                "id": "10",
-                "comment": "Equipment",
-                "description": "Tủ UPS (dãy phân phối)",
-                "array": [
-                {
-                "id": "01",
-                "comment": "Content",
-                "description": "( Ghi rõ cảnh báo nếu màn hình HMI báo)",
-                "type": [
-                "check",
-                "Bình Thường",
-                "Có vấn đề"
-                ],
-                "result": { }
-                }
-                ]
-                },
-                {
-                "id": "11",
-                "comment": "Equipment",
-                "description": "Tủ phân phối hạ thế",
-                "array": [
-                {
-                "id": "01",
-                "comment": "Content",
-                "description": "(Kiểm tra chi tiết từng ngăn tủ)",
-                "type": [
-                "check",
-                "Bình Thường",
-                "Có vấn đề"
-                ],
-                "result": { }
-                }
-                ]
-                },
-                {
-                "id": "12",
-                "comment": "Equipment",
-                "description": "Máy lạnh phòng điện trung+hạ thế",
-                "array": [
-                {
-                "id": "01",
-                "comment": "Content",
-                "description": "(Kiểm tra Hoạt động)",
-                "type": [
-                "check",
-                "Bình Thường",
-                "Có vấn đề"
-                ],
-                "result": { }
-                }
-                ]
-                },
-                {
-                "id": "13",
-                "comment": "Equipment",
-                "description": "Ngấm nước mương cáp điện phòng trung + hạ thế",
-                "array": [
-                {
-                "id": "01",
-                "comment": "Content",
-                "description": "(Kiểm tra Ngấm + Dột)",
-                "type": [
-                "check",
-                "Bình Thường",
-                "Có vấn đề"
-                ],
-                "result": { }
-                }
-                ]
-                },
-                {
-                "id": "14",
-                "comment": "Equipment",
-                "description": "Cụm dầu bồi trơn BPRT",
-                "array": [
-                {
-                "id": "01",
-                "comment": "Content",
-                "description": "Motor bơm dầu 1",
-                "type": [
-                "typing",
-                "Dòng điện"
-                ],
-                "result": { }
-                },
-                {
-                "id": "02",
-                "comment": "Content",
-                "description": "Motor bơm dầu 2",
-                "type": [
-                "typing",
-                "Dòng điện"
-                ],
-                "result": { }
-                },
-                {
-                "id": "03",
-                "comment": "Content",
-                "description": "Motor bơm dầu 1",
-                "type": [
-                "typing",
-                "Nhiệt độ"
-                ],
-                "result": { }
-                },
-                {
-                "id": "04",
-                "comment": "Content",
-                "description": "Motor bơm dầu 2",
-                "type": [
-                "typing",
-                "Nhiệt độ"
-                ],
-                "result": { }
-                }
-                ]
-                },
-                {
-                "id": "15",
-                "comment": "Equipment",
-                "description": "Cụm dầu bồi trơn D2500",
-                "array": [
-                {
-                "id": "01",
-                "comment": "Content",
-                "description": "Motor bơm dầu 1",
-                "type": [
-                "typing",
-                "Dòng điện"
-                ],
-                "result": { }
-                },
-                {
-                "id": "02",
-                "comment": "Content",
-                "description": "Motor bơm dầu 2",
-                "type": [
-                "typing",
-                "Dòng điện"
-                ],
-                "result": { }
-                },
-                {
-                "id": "03",
-                "comment": "Content",
-                "description": "Motor bơm dầu 1",
-                "type": [
-                "typing",
-                "Nhiệt độ"
-                ],
-                "result": { }
-                },
-                {
-                "id": "04",
-                "comment": "Content",
-                "description": "Motor bơm dầu 2",
-                "type": [
-                "typing",
-                "Nhiệt độ"
-                ],
-                "result": { }
-                }
-                ]
-                },
-                {
-                "id": "16",
-                "comment": "Equipment",
-                "description": "Cụm dầu Thủy Lực",
-                "array": [
-                {
-                "id": "01",
-                "comment": "Content",
-                "description": "Motor bơm dầu 1",
-                "type": [
-                "typing",
-                "Dòng điện"
-                ],
-                "result": { }
-                },
-                {
-                "id": "02",
-                "comment": "Content",
-                "description": "Motor bơm dầu 2",
-                "type": [
-                "typing",
-                "Dòng điện"
-                ],
-                "result": { }
-                },
-                {
-                "id": "03",
-                "comment": "Content",
-                "description": "Motor bơm dầu 1",
-                "type": [
-                "typing",
-                "Nhiệt độ"
-                ],
-                "result": { }
-                },
-                {
-                "id": "04",
-                "comment": "Content",
-                "description": "Motor bơm dầu 2",
-                "type": [
-                "typing",
-                "Nhiệt độ"
-                ],
-                "result": { }
-                }
-                ]
-                }
-                ]
-                },
-                {
-                "id": "02",
-                "description": "Lò gió nóng",
-                "array": [
-                    {
-                        "id": "01",
-                        "comment": "Content",
-                        "description" : "Motor bơm dầu 1",
-                        "type": ["typing", "Dòng điện"],
-                        "result": {
-                                    "220717":["ok", [78]]                   
-                                }
-                    },
-                    {
-                        "id": "02",
-                        "comment": "Content",
-                        "description" : "Motor bơm dầu 2",
-                        "type": ["typing", "Dòng điện"],
-                        "result": {
-                                    "220717":["warn", [128]]                   
-                                }
-                    },
-                    {
-                        "id": "03",
-                        "comment": "Content",
-                        "description" : "Motor bơm dầu 1",
-                        "type": ["typing", "Nhiệt độ"],
-                        "result": {
-                                                        
-                                }
-                    }
-                ]
-                },
-                {
-                "id": "03",
-                "description": "Đúc Gang",
-                "array": [
-                {
-                "id": "01",
-                "description": "Tủ điện trung thế BPRT",
-                "array": [
-                {
-                "id": "01",
-                "description": "Relay trung thế báo lỗi",
-                "array": [ ]
-                }
-                ]
-                }
-                ]
-                },
-                {
-                "id": "04",
-                "description": "Lọc Bụi gas"
-                }
-                ]
-    },
-    {
-    "id": "02",
-    "description": "Khu Vực Lò Vôi",
-    "array": [
-                {
-                "id": "01",
-                "description": "XLB Thành Phẩm",
-                "array": [
-                {
-                "id": "01",
-                "description": "Tủ điện",
-                "array": [
-                {
-                "id": "01",
-                "description": " báo lỗi",
-                "array": [ ]
-                }
-                ]
-                }
-                ]
-                } ]
-    },
-    {
-    "id": "03",
-    "description": "Khu Vực Sinter"
-    }
-    ]
 
 const groupMenuElm = document.querySelector('.group-menu')
 const areaMenuElm = document.querySelector('.area-menu')
@@ -619,7 +52,7 @@ function renderGroupMenu(data){
 
 function renderAreaMenu(input, idGroup, description){
     var htmlRaw = `<h3>Không Có Dữ Liệu</h3>`
-    input.forEach((crrGroup, index)=>{
+    for(let crrGroup of input){
         if(crrGroup.id === idGroup[0] && typeof(crrGroup.array) != "undefined"){
             htmlRaw = (crrGroup.array.map((crrArea, index)=>{
             var infoRender = getInfo(info, "area", [idGroup, crrArea.id] , dateCheck)
@@ -631,9 +64,9 @@ function renderAreaMenu(input, idGroup, description){
                             </div>
                             <span class="persent" ">${persent}%</span>
                         </div>`
-            })).join("") 
+            })).join("") ; break
         }
-    })
+    }
     areaMenuElm.innerHTML = htmlRaw
     areaMenuElm.style.paddingTop = headerElm.offsetHeight + "px"
     headerTitleElm.innerText = description //gán tiêu để của menu
@@ -666,9 +99,9 @@ function renderAreaMenu(input, idGroup, description){
 
 function renderEquipmentMenu(input, idArea, description, oldMenu){
     var htmlRaw = `<h3>Không Có Dữ Liệu</h3>`
-    input.filter((crrGroup, index)=>{
+    for(let crrGroup of input){
         if(crrGroup.id === idArea[0] && typeof(crrGroup.array) != "undefined"){ //Nhóm -group
-            crrGroup.array.filter((crrArea, index)=>{
+            for(let crrArea of crrGroup.array){
                 if(crrArea.id === idArea[1] && typeof(crrArea.array) != "undefined"){ //khu vưc -Area
                     htmlRaw = (crrArea.array.map((crrEquip, index)=>{ //Equipment
                         return `<div class="equipment-menu-wrap item-${crrEquip.id}" data-index:"${crrEquip.id}">
@@ -681,12 +114,12 @@ function renderEquipmentMenu(input, idArea, description, oldMenu){
                                     }
                                     )).join("")} 
                                 </div>`
-                    })).join("")
+                    })).join("") ; break //thoát vòng ccrArea 
                 }
-            })   
+            } break //thoát vòng ccrGroup   
         }
                 
-    })
+    }
     equipmentMenuElm.innerHTML = htmlRaw
     equipmentMenuElm.style.paddingTop = headerElm.offsetHeight + "px"
     headerTitleElm.innerText = description
@@ -751,7 +184,6 @@ function menuDisplay(string, backTitle){
     }
     if (backTitle)
     {
-        console.log("menu", oldMenuTitle)
         if(oldMenuTitle.length>=2)
         {
             if(oldMenuTitle[oldMenuTitle.length - 1] != headerTitleElm.innerText && oldMenuTitle != undefined )
@@ -773,7 +205,7 @@ function handleEven()
         const description = e.target.closest('.group-menu_wrap').querySelector('.title').innerText
         levelId = [idItemClick]
         oldMenu = headerTitleElm.innerText  //lưu tiêu đề của menu Cha
-        renderAreaMenu(dataMain, levelId, description, oldMenu)
+        renderAreaMenu(data, levelId, description, oldMenu)
     
     }
 
@@ -789,7 +221,7 @@ function handleEven()
         var levelIdTemp = [levelId[0], idItemClick]
         levelId = levelIdTemp
         oldMenu = headerTitleElm.innerText  //lưu tiêu đề của menu Cha
-        renderEquipmentMenu(dataMain, levelId, description, oldMenu)
+        renderEquipmentMenu(data, levelId, description, oldMenu)
         
     
     }
